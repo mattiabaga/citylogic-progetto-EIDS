@@ -1,0 +1,8 @@
+package com.citylogic.model.core;
+
+public enum TerrainType {
+	FLAT,
+	WATER,
+	FOREST,
+	MOUNTAIN
+}

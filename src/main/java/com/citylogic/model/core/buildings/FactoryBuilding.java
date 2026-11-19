@@ -1,5 +1,6 @@
 package com.citylogic.model.core.buildings;
 
+import com.citylogic.model.core.Building;
 import com.citylogic.model.core.City;
 
 public class FactoryBuilding extends Building {
