@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.citylogic.controller.StatusDashboardController"
+      spacing="10"
+      prefWidth="240">
+
+    <Label text="Stato della città"/>
+
+    <Label fx:id="budgetLabel" text="Budget: --"/>
+    <Label fx:id="populationLabel" text="Popolazione: --"/>
+    <Label fx:id="happinessLabel" text="Felicità: --"/>
+    <Label fx:id="pollutionLabel" text="Inquinamento: --"/>
+    <Label fx:id="tickLabel" text="Tick: --"/>
+
+</VBox>
