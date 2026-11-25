@@ -4,6 +4,6 @@ public enum MetricType {
     POPULATION,
     HAPPINESS,
     POLLUTION,
-    ENERGY,
+    ENERGY,     //NOT IN USE
     INCOME
 }
