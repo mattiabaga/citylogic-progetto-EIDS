@@ -11,8 +11,20 @@ public class Cell {
         return building != null;
     }
 
+    public int getX(){
+        return x;
+    }
+
+    public int getY(){
+        return y;
+    }
+
     public Building getBuilding() {
         return building;
+    }
+
+    public TerrainType getTerrainType(){
+        return terrain;
     }
 
     public boolean getAceessible(){
