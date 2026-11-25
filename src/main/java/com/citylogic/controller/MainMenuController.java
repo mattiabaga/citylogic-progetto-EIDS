@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import javafx.stage.Window;
 
 import java.io.File;
@@ -26,8 +27,12 @@ public class MainMenuController {
         try {
             Parent gameView = FXMLLoader.load(Objects.requireNonNull(
                     getClass().getResource("/com/citylogic/view/game-view.fxml")));
-            // Si sostituisce il contenuto della finestra, mantenendone le dimensioni
+            // Si sostituisce il contenuto della finestra e la si massimizza
+            // (schermo intero "in finestra": restano barra del titolo e taskbar).
+            // La griglia si adatta da sola alla nuova dimensione.
+            Stage stage = (Stage) statusLabel.getScene().getWindow();
             statusLabel.getScene().setRoot(gameView);
+            stage.setMaximized(true);
         } catch (IOException e) {
             statusLabel.setText("Impossibile aprire la schermata di gioco: " + e.getMessage());
         }

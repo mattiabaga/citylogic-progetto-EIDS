@@ -202,3 +202,53 @@
     -fx-border-color: #2563eb;
     -fx-text-fill: white;
 }
+
+/* --- Controlli del tempo (in alto a destra) --- */
+.time-controls .stat {
+    -fx-border-color: transparent;
+    -fx-min-width: 80;
+}
+
+.tick-button {
+    -fx-font-size: 13px;
+    -fx-padding: 6 12;
+    -fx-background-color: #2563eb;
+    -fx-text-fill: white;
+    -fx-background-radius: 6;
+    -fx-cursor: hand;
+}
+
+.tick-button:hover {
+    -fx-background-color: #1d4ed8;
+}
+
+.ticks-field {
+    -fx-font-size: 13px;
+    -fx-padding: 6 8;
+    -fx-background-radius: 6;
+    -fx-border-color: #cbd2d9;
+    -fx-border-radius: 6;
+    -fx-alignment: center;
+}
+
+/* Valore di N non valido (vuoto, 0 o troppo grande) */
+.ticks-field.invalid {
+    -fx-border-color: #dc2626;
+}
+
+/* --- Finestra "Avanza nel tempo" --- */
+.dialog-root {
+    -fx-background-color: white;
+    -fx-padding: 18 20;
+}
+
+.error-text {
+    -fx-font-size: 12px;
+    -fx-text-fill: #dc2626;
+}
+
+/* Nella finestra i due pulsanti hanno la stessa dimensione */
+.dialog-root .secondary-button {
+    -fx-font-size: 13px;
+    -fx-padding: 6 12;
+}
