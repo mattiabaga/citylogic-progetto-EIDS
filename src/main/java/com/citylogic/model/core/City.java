@@ -10,10 +10,30 @@ public class City {
     private CityGrid grid;
     private CityState state;
 
+    public String getName(){
+        return name;
+    }
+
     public double getBudget() {
         return budget;
     }
 
+    public int getTick(){
+        return tick;
+    }
+
+    public PolicyManager getPolicyManager(){
+        return policies;
+    }
+    
+    public CityGrid getCityGrid(){
+        return grid;
+    }
+
+    public CityState getCityState(){
+        return state;
+    }
+    
     public void spend(double amount) {
         // TODO
     }
@@ -24,9 +44,5 @@ public class City {
 
     public void removeObserver(Observer o) {
         // TODO
-    }
-
-    public CityGrid getCityGrid(){
-        return grid;
     }
 }

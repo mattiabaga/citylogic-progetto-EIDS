@@ -11,11 +11,15 @@ public class Cell {
         return building != null;
     }
 
-    public void setBuilding(Building b) {
-        // TODO
-    }
-
     public Building getBuilding() {
         return building;
+    }
+
+    public boolean getAceessible(){
+        return accessible;
+    }
+
+    public void setBuilding(Building b) {
+        // TODO
     }
 }
