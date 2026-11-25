@@ -5,10 +5,10 @@ public class Cell {
     private int y;
     private Building building;
     private TerrainType terrain;
-    private boolean accessible;
+    private boolean accessible;     //cosa intendiamo con accessibile?? se è collegata ad una strada? 
 
     public boolean isOccupied() {
-        return false;
+        return building != null;
     }
 
     public void setBuilding(Building b) {

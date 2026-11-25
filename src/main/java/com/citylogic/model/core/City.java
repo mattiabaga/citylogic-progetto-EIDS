@@ -25,4 +25,8 @@ public class City {
     public void removeObserver(Observer o) {
         // TODO
     }
+
+    public CityGrid getCityGrid(){
+        return grid;
+    }
 }
