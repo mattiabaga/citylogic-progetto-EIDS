@@ -8,6 +8,9 @@ import com.citylogic.model.core.Cell;
 import com.citylogic.model.core.Building;
 import com.citylogic.model.core.buildings.*;
 
+    /*  IMPORTANTE:
+    nel caso in cui venisssero aggiunte nuove sottoclassi di Building vanno implementati gli else if del metodo analyze!
+     */
 public class GridAnalyzer {
     
     public GridSnapshot analyze(CityGrid grid){
