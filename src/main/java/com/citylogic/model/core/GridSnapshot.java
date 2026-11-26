@@ -33,11 +33,11 @@ public class GridSnapshot {
             throw new IllegalArgumentException("list of buildings not valid");
         this.buildings = List.copyOf(buildings);
 
-        if(totalPollutionProduced < 0 || Double.isFinite(totalPollutionProduced))
+        if(Double.isFinite(totalPollutionProduced) || totalPollutionProduced < 0)
             throw new IllegalArgumentException("TotalPollutionProduced not valid");
         this.totalPollutionProduced = totalPollutionProduced;
 
-        if(totalPollutionReduction < 0 || Double.isFinite(totalPollutionReduction))
+        if(Double.isFinite(totalPollutionReduction) || totalPollutionReduction < 0)
             throw new IllegalArgumentException("TotalPollutionReduction not valid");
         this.totalPollutionReduction = totalPollutionReduction;
 
@@ -49,7 +49,7 @@ public class GridSnapshot {
             throw new IllegalArgumentException("ActiveHuoseCapacity not valid");
         this.activeHouseCapacity = activeHouseCapacity;
 
-        if(totalMaintenance < 0 || Double.isFinite(totalMaintenance))
+        if(Double.isFinite(totalMaintenance) || totalMaintenance < 0)
             throw new IllegalArgumentException("TotalMaintenance not valid");
         this.totalMaintenance = totalMaintenance;
 
@@ -57,15 +57,15 @@ public class GridSnapshot {
             throw new IllegalArgumentException("TotalWorkNeeded not valid");
         this.totalWorkNeeded = totalWorkNeeded;
 
-        if(totalFactoryProduction < 0 || Double.isFinite(totalFactoryProduction))
+        if(Double.isFinite(totalFactoryProduction) || totalFactoryProduction < 0)
             throw new IllegalArgumentException("TotalFactoryIncome not valid");
         this.totalFactoryProduction = totalFactoryProduction;
 
-        if(totalEnergyProduced < 0 || Double.isFinite(totalEnergyProduced))
+        if(Double.isFinite(totalEnergyProduced) || totalEnergyProduced < 0)
             throw new IllegalArgumentException("TotalEnergyProduced not valid");
         this.totalEnergyProduced = totalEnergyProduced;
 
-        if(totalShopIncomeBonus < 0 || Double.isFinite(totalShopIncomeBonus))
+        if(Double.isFinite(totalShopIncomeBonus) || totalShopIncomeBonus < 0)
             throw new IllegalArgumentException("TotalShopIncomeBonus not valid");
         this.totalShopIncomeBonus = totalShopIncomeBonus;
     }
