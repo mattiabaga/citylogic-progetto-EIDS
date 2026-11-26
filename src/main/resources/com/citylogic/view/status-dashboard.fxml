@@ -1,20 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox xmlns="http://javafx.com/javafx"
+<!--
+    Dashboard delle metriche della città (SCRUM-111).
+    Componente di sola lettura: mostra i valori ricevuti dall'esterno tramite
+    StatusDashboardController.updateMetrics(...) e non contiene logica di gioco.
+
+    Viene inclusa nella barra in alto della schermata di gioco (game-view.fxml)
+    con <fx:include>, ma può essere caricata anche da sola (vedi DashboardPreview).
+-->
+<HBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
       fx:controller="com.citylogic.controller.StatusDashboardController"
-      spacing="10"
-      prefWidth="240">
+      stylesheets="@style.css"
+      styleClass="status-dashboard"
+      alignment="CENTER_LEFT" spacing="8">
 
-    <Label text="Stato della città"/>
+    <VBox styleClass="stat">
+        <Label text="Budget" styleClass="stat-name"/>
+        <Label fx:id="budgetLabel" text="—" styleClass="stat-value"/>
+    </VBox>
+    <VBox styleClass="stat">
+        <Label text="Popolazione" styleClass="stat-name"/>
+        <Label fx:id="populationLabel" text="—" styleClass="stat-value"/>
+    </VBox>
+    <VBox styleClass="stat">
+        <Label text="Felicità" styleClass="stat-name"/>
+        <Label fx:id="happinessLabel" text="—" styleClass="stat-value"/>
+    </VBox>
 
-    <Label fx:id="budgetLabel" text="Budget: --"/>
-    <Label fx:id="populationLabel" text="Popolazione: --"/>
-    <Label fx:id="happinessLabel" text="Felicità: --"/>
-    <Label fx:id="pollutionLabel" text="Inquinamento: --"/>
-    <Label fx:id="tickLabel" text="Tick: --"/>
+    <!-- Spazio elastico: porta il tick sul lato destro, accanto ai controlli del tempo -->
+    <Region HBox.hgrow="ALWAYS"/>
 
-</VBox>
+    <VBox styleClass="stat, tick-stat">
+        <Label text="Tick attuale" styleClass="stat-name"/>
+        <Label fx:id="tickLabel" text="0" styleClass="stat-value"/>
+    </VBox>
+</HBox>

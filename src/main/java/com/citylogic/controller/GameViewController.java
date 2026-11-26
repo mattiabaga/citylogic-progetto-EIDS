@@ -65,12 +65,9 @@ public class GameViewController {
     };
 
     // ----- Barra degli status -----
-    @FXML private Label budgetValue;
-    @FXML private Label populationValue;
-    @FXML private Label happinessValue;
-
-    // ----- Avanzamento del tempo -----
-    @FXML private Label tickValue;
+    // Controller della dashboard inclusa con <fx:include fx:id="statusDashboard">:
+    // JavaFX lo inietta automaticamente (nome = fx:id + "Controller")
+    @FXML private StatusDashboardController statusDashboardController;
 
     // ----- Griglia -----
     @FXML private StackPane gridHolder;
@@ -384,7 +381,7 @@ public class GameViewController {
 
             Stage stage = new Stage();
             stage.setTitle("Avanza nel tempo");
-            stage.initOwner(tickValue.getScene().getWindow());
+            stage.initOwner(gridHolder.getScene().getWindow());
             stage.initModality(Modality.WINDOW_MODAL); // blocca la finestra di gioco finché è aperta
             stage.setResizable(false);
             stage.setScene(new Scene(content));
@@ -418,17 +415,15 @@ public class GameViewController {
 
     /** Aggiorna il "Tick attuale" mostrato in alto a destra. */
     public void showTick(int tick) {
-        tickValue.setText(String.valueOf(tick));
+        statusDashboardController.updateTick(tick);
     }
 
     /**
-     * Aggiorna i valori mostrati nella barra in alto.
+     * Aggiorna i valori mostrati nella barra in alto, delegando alla dashboard.
      * Pensato per essere chiamato dall'Observer della UI a ogni tick,
-     * con i valori letti dal CityState (il tick si aggiorna con showTick).
+     * con i valori letti dal CityState.
      */
-    public void showStatus(double budget, int population, double happiness) {
-        budgetValue.setText(String.format("%,.0f €", budget));
-        populationValue.setText(String.format("%,d", population));
-        happinessValue.setText(String.format("%.0f%%", happiness));
+    public void showStatus(double budget, int population, double happiness, int tick) {
+        statusDashboardController.updateMetrics(budget, population, happiness, tick);
     }
 }

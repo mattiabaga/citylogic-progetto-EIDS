@@ -17,7 +17,6 @@ public class DashboardPreview extends Application {
     private double budget = 12500;
     private int population = 840;
     private double happiness = 74.5;
-    private double pollution = 32.0;
     private long tick = 18;
 
     @Override
@@ -36,7 +35,6 @@ public class DashboardPreview extends Application {
             tick++;
             population += 10;
             happiness += 0.5;
-            pollution += 1;
 
             refreshDashboard(controller);
         });
@@ -51,13 +49,14 @@ public class DashboardPreview extends Application {
         root.setPadding(new Insets(15));
 
         stage.setTitle("Citylogic - Dashboard Preview");
-        stage.setScene(new Scene(root, 340, 300));
+        // La dashboard ora è una barra orizzontale: finestra più larga
+        stage.setScene(new Scene(root, 700, 220));
         stage.show();
     }
 
     private void refreshDashboard(StatusDashboardController controller) {
         controller.updateMetrics(
-                budget, population, happiness, pollution, tick
+                budget, population, happiness, tick
         );
     }
 
