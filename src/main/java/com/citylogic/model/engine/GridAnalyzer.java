@@ -56,7 +56,7 @@ public class GridAnalyzer {
                     }else if(building instanceof FactoryBuilding){
                         FactoryBuilding factory = (FactoryBuilding) building;
 
-                        totalWorkNeeded += factory.getWorkersNeeded();
+                        totalWorkNeeded += factory.getWorkerNeeded();
                         totalFactoryProduction += factory.getProduction(); 
 
                     }else if(building instanceof Shop){

@@ -10,7 +10,9 @@ public class HappinessCalculator {
         int population = state.gePopulation();
         int maxPopulation = snapshot.getActiveHouseCapacity();
 
-        double occupationRate = (double) population / (double) maxPopulation;
+        double occupationRate = 1;
+        if(maxPopulation != 0)
+            occupationRate = (double) population / (double) maxPopulation;
         //      R = P(k) / mP
 
         double kPopMaxPenalty = 30;
@@ -25,12 +27,9 @@ public class HappinessCalculator {
         /*CALCOLO DELLA PENALITà DA INQUINAMENTO */
         double pollution = snapshot.getTotalPollutionProduced() - snapshot.getTotalPollutionReduction();
 
-        if(pollution < 0)
-            return 0;
-
         double kPolPenalty = 0.3;
 
-        double pollutionPenalty = pollution * kPolPenalty;
+        double pollutionPenalty = Math.max(0, pollution * kPolPenalty); 
         //  Ol = kl * L
 
         /*CALCOLO DELLA HAPPINESS ATTESA*/

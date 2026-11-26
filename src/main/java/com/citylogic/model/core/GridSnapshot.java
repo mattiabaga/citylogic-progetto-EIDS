@@ -12,7 +12,7 @@ public class GridSnapshot {
     private final int totalHouseCapacity;
     private final int activeHouseCapacity;
     private final double totalMaintenance;
-    private final int totalWorkNeeded;
+    private final int totalWorkerNeeded;
     private final double totalFactoryProduction;
     private final double totalEnergyProduced;
     private final double totalShopIncomeBonus;
@@ -23,7 +23,7 @@ public class GridSnapshot {
                         int totalHouseCapacity,
                         int activeHouseCapacity,
                         double totalMaintenance,
-                        int totalWorkNeeded,
+                        int totalWorkerNeeded,
                         double totalFactoryProduction,
                         double totalEnergyProduced,
                         double totalShopIncomeBonus)
@@ -33,11 +33,11 @@ public class GridSnapshot {
             throw new IllegalArgumentException("list of buildings not valid");
         this.buildings = List.copyOf(buildings);
 
-        if(Double.isFinite(totalPollutionProduced) || totalPollutionProduced < 0)
+        if(!Double.isFinite(totalPollutionProduced) || totalPollutionProduced < 0)
             throw new IllegalArgumentException("TotalPollutionProduced not valid");
         this.totalPollutionProduced = totalPollutionProduced;
 
-        if(Double.isFinite(totalPollutionReduction) || totalPollutionReduction < 0)
+        if(!Double.isFinite(totalPollutionReduction) || totalPollutionReduction < 0)
             throw new IllegalArgumentException("TotalPollutionReduction not valid");
         this.totalPollutionReduction = totalPollutionReduction;
 
@@ -49,23 +49,23 @@ public class GridSnapshot {
             throw new IllegalArgumentException("ActiveHuoseCapacity not valid");
         this.activeHouseCapacity = activeHouseCapacity;
 
-        if(Double.isFinite(totalMaintenance) || totalMaintenance < 0)
+        if(!Double.isFinite(totalMaintenance) || totalMaintenance < 0)
             throw new IllegalArgumentException("TotalMaintenance not valid");
         this.totalMaintenance = totalMaintenance;
 
-        if(totalWorkNeeded < 0)
+        if(totalWorkerNeeded < 0)
             throw new IllegalArgumentException("TotalWorkNeeded not valid");
-        this.totalWorkNeeded = totalWorkNeeded;
+        this.totalWorkerNeeded = totalWorkerNeeded;
 
-        if(Double.isFinite(totalFactoryProduction) || totalFactoryProduction < 0)
+        if(!Double.isFinite(totalFactoryProduction) || totalFactoryProduction < 0)
             throw new IllegalArgumentException("TotalFactoryIncome not valid");
         this.totalFactoryProduction = totalFactoryProduction;
 
-        if(Double.isFinite(totalEnergyProduced) || totalEnergyProduced < 0)
+        if(!Double.isFinite(totalEnergyProduced) || totalEnergyProduced < 0)
             throw new IllegalArgumentException("TotalEnergyProduced not valid");
         this.totalEnergyProduced = totalEnergyProduced;
 
-        if(Double.isFinite(totalShopIncomeBonus) || totalShopIncomeBonus < 0)
+        if(!Double.isFinite(totalShopIncomeBonus) || totalShopIncomeBonus < 0)
             throw new IllegalArgumentException("TotalShopIncomeBonus not valid");
         this.totalShopIncomeBonus = totalShopIncomeBonus;
     }
@@ -94,8 +94,8 @@ public class GridSnapshot {
         return totalMaintenance;
     }
 
-    public int getTotalWorkNeeded() {
-        return totalWorkNeeded;
+    public int getTotalWorkerNeeded() {
+        return totalWorkerNeeded;
     }
 
     public double getTotalFactoryProduction() {

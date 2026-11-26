@@ -18,7 +18,7 @@ public class FactoryBuilding extends Building {
         this.production=production;
     }
 
-    public int getWorkersNeeded(){
+    public int getWorkerNeeded(){
         return workersNeeded;
     }
 
