@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<!-- Menù principale di CityLogic -->
+<StackPane xmlns:fx="http://javafx.com/fxml"
+           fx:controller="com.citylogic.controller.MainMenuController"
+           stylesheets="@style.css">
+
+    <VBox alignment="CENTER" spacing="12" styleClass="menu-card"
+          maxWidth="380" maxHeight="-Infinity">
+
+        <ImageView fitWidth="72" fitHeight="72" preserveRatio="true" smooth="true">
+            <Image url="@images/icon-128.png"/>
+        </ImageView>
+
+        <Label text="CityLogic" styleClass="title"/>
+        <Label text="Simulatore di gestione urbana" styleClass="subtitle"/>
+
+        <Region prefHeight="20"/>
+
+        <Button text="Nuova simulazione"
+                onAction="#onNewSimulation"
+                styleClass="primary-button"
+                defaultButton="true"
+                maxWidth="Infinity"/>
+
+        <Button text="Carica un salvataggio"
+                onAction="#onLoadSave"
+                styleClass="secondary-button"
+                maxWidth="Infinity"/>
+
+        <!-- Messaggi di stato (es. file selezionato) -->
+        <Label fx:id="statusLabel" styleClass="status" wrapText="true"/>
+    </VBox>
+</StackPane>

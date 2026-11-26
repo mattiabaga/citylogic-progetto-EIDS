@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
+  <!-- Logo CityLogic: skyline stilizzato su sfondo blu -->
+  <rect x="0" y="0" width="256" height="256" rx="56" fill="#2563eb"/>
+  <!-- Edifici -->
+  <rect x="52"  y="120" width="44" height="92"  rx="4" fill="#ffffff"/>
+  <rect x="106" y="64"  width="48" height="148" rx="4" fill="#ffffff"/>
+  <rect x="164" y="144" width="40" height="68"  rx="4" fill="#ffffff"/>
+  <!-- Finestre dell'edificio centrale -->
+  <g fill="#2563eb">
+    <rect x="116" y="80"  width="10" height="12" rx="2"/><rect x="134" y="80"  width="10" height="12" rx="2"/>
+    <rect x="116" y="104" width="10" height="12" rx="2"/><rect x="134" y="104" width="10" height="12" rx="2"/>
+    <rect x="116" y="128" width="10" height="12" rx="2"/><rect x="134" y="128" width="10" height="12" rx="2"/>
+    <rect x="116" y="152" width="10" height="12" rx="2"/><rect x="134" y="152" width="10" height="12" rx="2"/>
+  </g>
+  <!-- Linea del terreno -->
+  <rect x="40" y="206" width="176" height="12" rx="6" fill="#bfdbfe"/>
+</svg>

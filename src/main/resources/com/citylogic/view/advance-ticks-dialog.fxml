@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<!--
+    Finestra "Avanza nel tempo": permette di scegliere se
+    - avanzare di N tick, oppure
+    - avanzare fino al tick N (N deve essere maggiore del tick attuale).
+-->
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.citylogic.controller.AdvanceTicksDialogController"
+      stylesheets="@style.css"
+      styleClass="dialog-root" spacing="12" prefWidth="340">
+
+    <Label text="Avanza nel tempo" styleClass="panel-title"/>
+    <Label fx:id="currentTickLabel" styleClass="panel-hint"/>
+
+    <fx:define>
+        <ToggleGroup fx:id="modeGroup"/>
+    </fx:define>
+    <RadioButton fx:id="byAmountRadio" text="Avanza di N tick"
+                 toggleGroup="$modeGroup" selected="true"/>
+    <RadioButton fx:id="untilTickRadio" text="Avanza fino al tick N"
+                 toggleGroup="$modeGroup"/>
+
+    <HBox alignment="CENTER_LEFT" spacing="8">
+        <Label text="N ="/>
+        <TextField fx:id="nField" prefColumnCount="6" onAction="#onConfirm" styleClass="ticks-field"/>
+    </HBox>
+
+    <!-- Messaggio d'errore (vuoto se il valore è valido) -->
+    <Label fx:id="errorLabel" styleClass="error-text" wrapText="true"/>
+
+    <HBox alignment="CENTER_RIGHT" spacing="8">
+        <Button text="Annulla" onAction="#onCancel" cancelButton="true" styleClass="secondary-button"/>
+        <Button text="Avanza" onAction="#onConfirm" defaultButton="true" styleClass="tick-button"/>
+    </HBox>
+</VBox>
