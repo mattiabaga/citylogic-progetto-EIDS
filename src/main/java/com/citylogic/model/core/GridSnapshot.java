@@ -33,11 +33,11 @@ public class GridSnapshot {
             throw new IllegalArgumentException("list of buildings not valid");
         this.buildings = List.copyOf(buildings);
 
-        if(totalPollutionProduced < 0)
+        if(totalPollutionProduced < 0 || Double.isFinite(totalPollutionProduced))
             throw new IllegalArgumentException("TotalPollutionProduced not valid");
         this.totalPollutionProduced = totalPollutionProduced;
 
-        if(totalPollutionReduction < 0)
+        if(totalPollutionReduction < 0 || Double.isFinite(totalPollutionReduction))
             throw new IllegalArgumentException("TotalPollutionReduction not valid");
         this.totalPollutionReduction = totalPollutionReduction;
 
@@ -49,7 +49,7 @@ public class GridSnapshot {
             throw new IllegalArgumentException("ActiveHuoseCapacity not valid");
         this.activeHouseCapacity = activeHouseCapacity;
 
-        if(totalMaintenance < 0)
+        if(totalMaintenance < 0 || Double.isFinite(totalMaintenance))
             throw new IllegalArgumentException("TotalMaintenance not valid");
         this.totalMaintenance = totalMaintenance;
 
@@ -57,15 +57,15 @@ public class GridSnapshot {
             throw new IllegalArgumentException("TotalWorkNeeded not valid");
         this.totalWorkNeeded = totalWorkNeeded;
 
-        if(totalFactoryIncome < 0)
+        if(totalFactoryIncome < 0 || Double.isFinite(totalFactoryIncome))
             throw new IllegalArgumentException("TotalFactoryIncome not valid");
         this.totalFactoryIncome = totalFactoryIncome;
 
-        if(totalEnergyProduced < 0)
+        if(totalEnergyProduced < 0 || Double.isFinite(totalEnergyProduced))
             throw new IllegalArgumentException("TotalEnergyProduced not valid");
         this.totalEnergyProduced = totalEnergyProduced;
 
-        if(totalShopIncomeBonus < 0)
+        if(totalShopIncomeBonus < 0 || Double.isFinite(totalShopIncomeBonus))
             throw new IllegalArgumentException("TotalShopIncomeBonus not valid");
         this.totalShopIncomeBonus = totalShopIncomeBonus;
     }
@@ -109,5 +109,5 @@ public class GridSnapshot {
     public double getTotalShopIncomeBonus() {
         return totalShopIncomeBonus;
     }
-    
+
 }
