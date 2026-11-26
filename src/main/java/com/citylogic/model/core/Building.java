@@ -40,11 +40,11 @@ public abstract class Building {
         // TODO
     }
 
-    public int getPopulationImpact() {
+    public int getPopulationImpact() {      //A COSA SERVE????
         return 0;
     }
 
-    public double getEnergyConsumption() {  //DOVREMMO FARLA COME BOOL 
+    public double getEnergyConsumption() {   
         return 0.0;
     }
 

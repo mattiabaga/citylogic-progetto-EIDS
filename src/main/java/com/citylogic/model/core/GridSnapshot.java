@@ -13,7 +13,7 @@ public class GridSnapshot {
     private final int activeHouseCapacity;
     private final double totalMaintenance;
     private final int totalWorkNeeded;
-    private final double totalFactoryIncome;
+    private final double totalFactoryProduction;
     private final double totalEnergyProduced;
     private final double totalShopIncomeBonus;
 
@@ -24,7 +24,7 @@ public class GridSnapshot {
                         int activeHouseCapacity,
                         double totalMaintenance,
                         int totalWorkNeeded,
-                        double totalFactoryIncome,
+                        double totalFactoryProduction,
                         double totalEnergyProduced,
                         double totalShopIncomeBonus)
     {
@@ -57,9 +57,9 @@ public class GridSnapshot {
             throw new IllegalArgumentException("TotalWorkNeeded not valid");
         this.totalWorkNeeded = totalWorkNeeded;
 
-        if(totalFactoryIncome < 0 || Double.isFinite(totalFactoryIncome))
+        if(totalFactoryProduction < 0 || Double.isFinite(totalFactoryProduction))
             throw new IllegalArgumentException("TotalFactoryIncome not valid");
-        this.totalFactoryIncome = totalFactoryIncome;
+        this.totalFactoryProduction = totalFactoryProduction;
 
         if(totalEnergyProduced < 0 || Double.isFinite(totalEnergyProduced))
             throw new IllegalArgumentException("TotalEnergyProduced not valid");
@@ -98,8 +98,8 @@ public class GridSnapshot {
         return totalWorkNeeded;
     }
 
-    public double getTotalFactoryIncome() {
-        return totalFactoryIncome;
+    public double getTotalFactoryProduction() {
+        return totalFactoryProduction;
     }
 
     public double getTotalEnergyProduced() {
