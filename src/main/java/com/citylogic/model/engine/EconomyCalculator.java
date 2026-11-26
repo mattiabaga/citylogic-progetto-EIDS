@@ -1,63 +1,54 @@
 package com.citylogic.model.engine;
 
-import com.citylogic.model.core.Building;
 import com.citylogic.model.core.City;
-import com.citylogic.model.core.CityGrid;
-import com.citylogic.model.core.buildings.FactoryBuilding;
-import com.citylogic.model.core.buildings.Shop;
-import com.citylogic.model.core.Cell;
+import com.citylogic.model.core.GridSnapshot;
 
+/*
+    Il calcolatore dell'economia calcola il guadagno al tempo k+1 prendendo i valori al tempo k
+
+    -FactoryBuilding
+    il guadagno delle fabbriche è pari alla sommatoria della produzione di tutte le factory se la popolazione è maggiore o uguale ai lavoratori necessari a far funzionare tutte le factory
+    altrimenti la produzione è moltiplicata per il rapporto tra la popolazione totale e i lavoratori necessari
+    in questo modo se si hanno 50 abitanti e 100 lavoratori necessari per le fabbriche, il guadagno sarà (guadagno totale delle fabbriche)* 50/100
+
+    -Shop
+    il guadagno degli shop è pari alla sommatoria del guadagno di tutti gli shop per la felicità in percentuale
+
+    -Maintenace
+    la spesa per il mantenimento di tutti gli edifici
+
+*/
 public class EconomyCalculator {
-    public double calculate(City city) {
+    public double calculate(GridSnapshot snapshot, City city) {
+        if(snapshot == null)
+            throw new IllegalArgumentException("GridSnapshot cannot be null");
+
         if(city == null)
-            throw new IllegalArgumentException("City object had not be initialized");
+            throw new IllegalArgumentException("City cannot be null");
 
-        double incomeSum = 0;       //sum of income - maintenance
-        int workers = city.getCityState().gePopulation();       //otteniamo la popolazione totale 
+        double totalIncome = 0;
 
-        CityGrid grid = city.getCityGrid();
-        if(grid == null)
-            throw new IllegalArgumentException("CityGrid object had not be intialized");
+        //calcolo del guadagno per le factory
+        totalIncome += snapshot.getTotalFactoryProduction() * Math.min(1, city.getCityState().gePopulation() / snapshot.getTotalWorkNeeded());
+            /*
+            La formula sarebbe:
+                                    I(t+1) = fp * min(1, p(t) / wn)
 
-        Cell cell;
-        Building building;
+            dove I è il guadagno, fp è la produzione delle factory, p è la popolazione, wn sono i lavoratori necessari, t è il tempo
+            */
 
-        for(int x = 0; x < grid.getWidth(); x++)
-            for(int y = 0; y < grid.getHeight(); y++){
-        
-                cell = grid.getCell(x, y);
-                if(cell == null)
-                    throw new IllegalArgumentException("Cell object had not be initialized");
+        //calcolo per il guadagno degli shop
+        totalIncome += snapshot.getTotalShopIncomeBonus() * city.getCityState().getHappiness() / 100;
+            /*
+            La formula sarebbe:
+                                    I(t+1) = si * H(t)
 
-                if(cell.isOccupied()){
+            dove I è il guadagno, si è il guadagno dato dagli shop, H è la happiness in percentuale, t è il tempo
+            */
 
-                    building = cell.getBuilding();
-                    if(building == null)        //dovrebbe essere inutile poichè attualmente isOccupied() controlla esattamente questo
-                        throw new IllegalArgumentException("Building object had not be initialized");
+        //calcolo del costo di manutenzione di tutti gli edifici
+        totalIncome -= snapshot.getTotalMaintenance();
 
-                    incomeSum += building.getMaintenance();     //il costo di mantenimento è comune a tutti gli edifici
-
-                    //sezione delle factory
-                    if(building instanceof FactoryBuilding){
-
-                        FactoryBuilding factory = (FactoryBuilding) building;
-
-                        workers -= factory.getWorkersNeeded();
-
-                        if(workers > 0)     //se ci sono abbastanza persone a lavorare allora la fabbrica produce
-                            incomeSum += factory.getProduction();
-
-                    }else if(building instanceof Shop){     //sezione degli shop
-
-                        Shop shop = (Shop) building;
-
-                        incomeSum += shop.getIncomeBonus() * city.getCityState().getHappiness() / 100;
-                        // il guadagno dello shop è proporzionale alla happiness, la quale è compresa tra 0 e 100
-
-                    }
-                }
-            }
-
-        return incomeSum;
+        return totalIncome;
     }
 }
