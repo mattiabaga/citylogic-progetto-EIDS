@@ -16,4 +16,5 @@ module com.citylogic {
     exports com.citylogic.model.engine;
     exports com.citylogic.model.infrastructure;
     exports com.citylogic.model.observer;
+    exports com.citylogic to javafx.graphics;
 }
