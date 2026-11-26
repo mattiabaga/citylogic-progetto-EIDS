@@ -1,6 +1,6 @@
 package com.citylogic.model.engine;
 
-import com.citylogic.model.core.City;
+import com.citylogic.model.core.CityState;
 import com.citylogic.model.core.GridSnapshot;
 
 /*
@@ -19,17 +19,17 @@ import com.citylogic.model.core.GridSnapshot;
 
 */
 public class EconomyCalculator {
-    public double calculate(GridSnapshot snapshot, City city) {
+    public double calculate(GridSnapshot snapshot, CityState state) {
         if(snapshot == null)
             throw new IllegalArgumentException("GridSnapshot cannot be null");
 
-        if(city == null)
-            throw new IllegalArgumentException("City cannot be null");
+        if(state == null)
+            throw new IllegalArgumentException("CityState cannot be null");
 
         double totalIncome = 0;
 
         //calcolo del guadagno per le factory
-        totalIncome += snapshot.getTotalFactoryProduction() * Math.min(1, city.getCityState().gePopulation() / snapshot.getTotalWorkNeeded());
+        totalIncome += snapshot.getTotalFactoryProduction() * Math.min(1,(double) state.gePopulation() / snapshot.getTotalWorkNeeded());
             /*
             La formula sarebbe:
                                     I(t+1) = fp * min(1, p(t) / wn)
@@ -38,7 +38,7 @@ public class EconomyCalculator {
             */
 
         //calcolo per il guadagno degli shop
-        totalIncome += snapshot.getTotalShopIncomeBonus() * city.getCityState().getHappiness() / 100;
+        totalIncome += snapshot.getTotalShopIncomeBonus() * state.getHappiness() / 100;
             /*
             La formula sarebbe:
                                     I(t+1) = si * H(t)
