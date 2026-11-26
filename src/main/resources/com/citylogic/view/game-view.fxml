@@ -4,12 +4,12 @@
 <?import javafx.scene.chart.LineChart?>
 <?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?><?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
@@ -28,28 +28,14 @@
     <!-- ===== Barra degli status ===== -->
     <top>
         <HBox styleClass="status-bar" alignment="CENTER_LEFT" spacing="8">
-            <VBox styleClass="stat">
-                <Label text="Budget" styleClass="stat-name"/>
-                <Label fx:id="budgetValue" text="—" styleClass="stat-value"/>
-            </VBox>
-            <VBox styleClass="stat">
-                <Label text="Popolazione" styleClass="stat-name"/>
-                <Label fx:id="populationValue" text="—" styleClass="stat-value"/>
-            </VBox>
-            <VBox styleClass="stat">
-                <Label text="Felicità" styleClass="stat-name"/>
-                <Label fx:id="happinessValue" text="—" styleClass="stat-value"/>
-            </VBox>
-
-            <!-- Spazio elastico: spinge i controlli del tempo sul lato destro -->
-            <Region HBox.hgrow="ALWAYS"/>
+            <!-- Dashboard delle metriche (budget, popolazione, felicità, tick):
+                 componente separato con il proprio controller, StatusDashboardController.
+                 Occupa tutto lo spazio libero, così il tick finisce accanto ai pulsanti. -->
+            <fx:include fx:id="statusDashboard" source="status-dashboard.fxml"
+                        HBox.hgrow="ALWAYS"/>
 
             <!-- ===== Avanzamento del tempo ===== -->
             <HBox styleClass="time-controls" alignment="CENTER_RIGHT" spacing="8">
-                <VBox styleClass="stat">
-                    <Label text="Tick attuale" styleClass="stat-name"/>
-                    <Label fx:id="tickValue" text="0" styleClass="stat-value"/>
-                </VBox>
                 <Button text="+1 tick" onAction="#onNextTick" styleClass="tick-button"/>
                 <!-- Apre la finestra per avanzare di N tick o fino al tick N -->
                 <Button text="Avanza…" onAction="#onOpenAdvanceDialog" styleClass="tick-button"/>

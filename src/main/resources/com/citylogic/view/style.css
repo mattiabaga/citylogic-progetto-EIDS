@@ -203,11 +203,20 @@
     -fx-text-fill: white;
 }
 
-/* --- Controlli del tempo (in alto a destra) --- */
-.time-controls .stat {
+/* --- Dashboard delle metriche (status-dashboard.fxml) --- */
+
+/* Il riquadro del tick, a destra, non ha il separatore verticale */
+.tick-stat {
     -fx-border-color: transparent;
     -fx-min-width: 80;
 }
+
+/* Budget sotto zero: in rosso (stato ":negative" impostato da StatusDashboardController) */
+.stat-value:negative {
+    -fx-text-fill: #b91c1c;
+}
+
+/* --- Controlli del tempo (in alto a destra) --- */
 
 .tick-button {
     -fx-font-size: 13px;
