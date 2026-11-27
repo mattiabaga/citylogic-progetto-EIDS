@@ -11,6 +11,12 @@ public class GameController {
     private TickEngine tickEngine;
     private BuildingFactory buildingFactory;
 
+    public GameController(){
+        this.city = new City();
+        this.tickEngine = new TickEngine(city);
+        this.buildingFactory = new BuildingFactory();
+    }
+
     public void buildBuilding(BuildingType type, int x, int y) {
         // TODO
     }
@@ -20,6 +26,7 @@ public class GameController {
     }
 
     public void nextTick() {
+        tickEngine.tick();
         // TODO
     }
 
