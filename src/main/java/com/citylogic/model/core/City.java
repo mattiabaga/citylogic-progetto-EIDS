@@ -38,6 +38,15 @@ public class City {
         // TODO
     }
 
+    public void applyTickResults(   int population,
+                                    double happiness,
+                                    double pollution,
+                                    double energy,//NOT IN USE
+                                    double income)
+    {
+        
+    }
+
     public void addObserver(Observer o) {
         // TODO
     }
