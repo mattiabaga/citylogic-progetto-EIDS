@@ -29,10 +29,17 @@ public class EconomyCalculator {
 
         //calcolo del guadagno per le factory
         int workerNeeded = snapshot.getTotalWorkerNeeded();
-        if(workerNeeded < 1)
-            workerNeeded = 1;
 
-        totalIncome += snapshot.getTotalFactoryProduction() * Math.min(1,(double) state.getPopulation() / workerNeeded);
+        double productionMultiplier = 1;
+
+        if(workerNeeded > 0) {
+            productionMultiplier = Math.min(
+                1,
+                (double) state.getPopulation() / workerNeeded
+            );
+        }
+
+        totalIncome += snapshot.getTotalFactoryProduction() * productionMultiplier;
             /*
             La formula sarebbe:
                                     I(t+1) = fp * min(1, p(t) / wn)
