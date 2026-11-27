@@ -1,7 +1,6 @@
 package com.citylogic.model.engine;
 
 import com.citylogic.model.core.CityState;
-import com.citylogic.model.core.GridSnapshot;
 
 /*
     Il calcolatore dell'economia calcola il guadagno al tempo k+1 prendendo i valori al tempo k

@@ -2,7 +2,6 @@ package com.citylogic.model.engine;
 
 import com.citylogic.model.core.City;
 import com.citylogic.model.core.CityState;
-import com.citylogic.model.core.GridSnapshot;
 
 public class TickEngine {
     private final City city;

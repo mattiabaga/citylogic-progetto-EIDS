@@ -1,7 +1,6 @@
 package com.citylogic.model.engine;
 
 import com.citylogic.model.core.CityState;
-import com.citylogic.model.core.GridSnapshot;
 
 public class HappinessCalculator {
     public double calculate(GridSnapshot snapshot, CityState state){
