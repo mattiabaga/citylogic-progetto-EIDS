@@ -5,9 +5,13 @@ import com.citylogic.model.core.GridSnapshot;
 
 public class HappinessCalculator {
     public double calculate(GridSnapshot snapshot, CityState state){
+        if(snapshot == null)
+            throw new IllegalArgumentException("GridSnapshot cannot be null");
+        if(state == null)
+            throw new IllegalArgumentException("CityState cannot be null");
 
         /*CALCOLO DELLA PENALITà DA SOVRAPOPOLAMENTO */
-        int population = state.gePopulation();
+        int population = state.getPopulation();
         int maxPopulation = snapshot.getActiveHouseCapacity();
 
         double occupationRate = 1;

@@ -23,7 +23,7 @@ seguendo le seguenti formule:
 public class PopulationCalculator {
     public int calculate(GridSnapshot snapshot, CityState state){
 
-        int population = state.gePopulation();
+        int population = state.getPopulation();
         double deltaPopulation = 0;
         int maxPopulation = snapshot.getActiveHouseCapacity();
         double alpha = 0.5;

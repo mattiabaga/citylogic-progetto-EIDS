@@ -10,7 +10,7 @@ public class CityState {
     private double income;
 
     //getter
-    public int gePopulation(){
+    public int getPopulation(){
         return population;
     }
 
