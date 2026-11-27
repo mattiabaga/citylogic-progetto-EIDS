@@ -1,6 +1,10 @@
 package com.citylogic.model.engine;
 
-public class GridSnapshot {
+/*
+    la classe rappresenta le sommatorie di tutti i valori cumulabili degli edifici della griglia in un determinato momento,
+    per questo motivo la classe è immutabile dopo la sua creazione
+*/
+public final class GridSnapshot {
     private final double totalPollutionProduced;
     private final double totalPollutionReduction;
     private final int totalHouseCapacity;
