@@ -1,12 +1,6 @@
 package com.citylogic.model.engine;
 
-import java.util.List;
-
-import com.citylogic.model.core.Building;
-
 public class GridSnapshot {
-    private final List<Building> buildings;
-
     private final double totalPollutionProduced;
     private final double totalPollutionReduction;
     private final int totalHouseCapacity;
@@ -17,8 +11,7 @@ public class GridSnapshot {
     private final double totalEnergyProduced;
     private final double totalShopIncomeBonus;
 
-    public GridSnapshot(List<Building> buildings,
-                        double totalPollutionProduced,
+    public GridSnapshot(double totalPollutionProduced,
                         double totalPollutionReduction,
                         int totalHouseCapacity,
                         int activeHouseCapacity,
@@ -28,10 +21,6 @@ public class GridSnapshot {
                         double totalEnergyProduced,
                         double totalShopIncomeBonus)
     {
-        
-        if(buildings == null)
-            throw new IllegalArgumentException("list of buildings not valid");
-        this.buildings = List.copyOf(buildings);
 
         if(!Double.isFinite(totalPollutionProduced) || totalPollutionProduced < 0)
             throw new IllegalArgumentException("TotalPollutionProduced not valid");
@@ -68,10 +57,6 @@ public class GridSnapshot {
         if(!Double.isFinite(totalShopIncomeBonus) || totalShopIncomeBonus < 0)
             throw new IllegalArgumentException("TotalShopIncomeBonus not valid");
         this.totalShopIncomeBonus = totalShopIncomeBonus;
-    }
-
-    public List<Building> getBuildings() {
-        return buildings;
     }
 
     public double getTotalPollutionProduced() {

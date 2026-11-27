@@ -17,8 +17,6 @@ public class GridAnalyzer {
         if(grid == null)
             throw new IllegalArgumentException("CityGrid cannot be null");
 
-        List<Building> buildingsList = new ArrayList<>();
-
         double totalPollutionProduced = 0;
         double totalPollutionReduction = 0;
         int totalHouseCapacity = 0;
@@ -37,7 +35,6 @@ public class GridAnalyzer {
                 if(cell.isOccupied()){
 
                     Building building = cell.getBuilding();
-                    buildingsList.add(building);
 
                     //variabili della superclasse
                     totalPollutionProduced += building.getPollutionProduced();
@@ -78,7 +75,6 @@ public class GridAnalyzer {
                 }
             }
          return new GridSnapshot(
-                                buildingsList,
                                 totalPollutionProduced,
                                 totalPollutionReduction,
                                 totalHouseCapacity,
