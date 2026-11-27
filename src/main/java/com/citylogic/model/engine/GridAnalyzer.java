@@ -1,7 +1,5 @@
 package com.citylogic.model.engine;
 
-import java.util.ArrayList;
-import java.util.List;
 import com.citylogic.model.core.CityGrid;
 import com.citylogic.model.core.Cell;
 import com.citylogic.model.core.Building;
