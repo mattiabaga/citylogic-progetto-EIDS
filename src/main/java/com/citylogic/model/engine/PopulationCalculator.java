@@ -1,7 +1,6 @@
 package com.citylogic.model.engine;
 
 import com.citylogic.model.core.CityState;
-import com.citylogic.model.core.GridSnapshot;
 
 /*
 Il calcolatore calcola la popolazione al tempo k+1 partendo dai valori a tempo k

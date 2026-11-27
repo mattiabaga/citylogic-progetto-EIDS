@@ -1,7 +1,5 @@
 package com.citylogic.model.engine;
 
-import com.citylogic.model.core.GridSnapshot;
-
 /*
 Il calcolatore definisce il livello di inquinamento al tempo k+1 partendo dallo stato attuale della griglia, considerabile come il tempo k
 
