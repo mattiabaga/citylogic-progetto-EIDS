@@ -72,7 +72,4 @@ public class CityState {
         
     }
 
-    public void notifyObservers() {
-        // TODO
-    }
 }

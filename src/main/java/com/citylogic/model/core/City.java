@@ -1,5 +1,7 @@
 package com.citylogic.model.core;
 
+import java.util.List;
+import java.util.ArrayList;
 import com.citylogic.model.observer.Observer;
 
 public class City {
@@ -9,6 +11,7 @@ public class City {
     private PolicyManager policies;
     private CityGrid grid;
     private CityState state;
+    private List<Observer> observerList;
 
     public String getName(){
         return name;
@@ -44,7 +47,7 @@ public class City {
                                     double energy,//NOT IN USE
                                     double income)
     {
-        
+
     }
 
     public void addObserver(Observer o) {
@@ -52,6 +55,10 @@ public class City {
     }
 
     public void removeObserver(Observer o) {
+        // TODO
+    }
+
+    public void notifyObservers() {
         // TODO
     }
 }
