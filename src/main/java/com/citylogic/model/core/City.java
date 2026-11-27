@@ -13,6 +13,7 @@ public class City {
     private CityState state;
     private List<Observer> observerList;
 
+    //getter
     public String getName(){
         return name;
     }
@@ -36,6 +37,17 @@ public class City {
     public CityState getCityState(){
         return state;
     }
+
+    //costruttori
+    public City(){
+        name = "DEFAULT";
+        budget = 0;
+        tick = 0;
+        policies = null;
+        grid = new CityGrid();
+        state = new CityState();
+        observerList = new ArrayList<Observer>();
+    }
     
     public void spend(double amount) {
         // TODO
@@ -51,14 +63,24 @@ public class City {
     }
 
     public void addObserver(Observer o) {
-        // TODO
+        if(o == null)
+            throw new IllegalArgumentException("Observer cannot be null");
+
+        if(!observerList.contains(o))
+            observerList.add(o);
+        
     }
 
     public void removeObserver(Observer o) {
-        // TODO
+        if(o == null)
+            throw new IllegalArgumentException("Observer cannot be null");
+        
+        if(!observerList.remove(o))
+            throw new IllegalArgumentException("Observer was not in observerList");
     }
 
-    public void notifyObservers() {
-        // TODO
+    private void notifyObservers() {
+        for (Observer observer : new ArrayList<>(observerList)) //la copia della lista serve a impedire problemi se durante la notifica viene chiamato add o remove
+            observer.update(this);  //il parametro passato è l'oggetto City
     }
 }
