@@ -2,6 +2,8 @@ package com.citylogic.model.core;
 
 import java.util.List;
 import java.util.ArrayList;
+
+import com.citylogic.model.observer.MetricType;
 import com.citylogic.model.observer.Observer;
 
 public class City {
@@ -49,6 +51,7 @@ public class City {
         observerList = new ArrayList<Observer>();
     }
     
+    //metodi specifici di City
     public void spend(double amount) {
         // TODO
     }
@@ -58,10 +61,33 @@ public class City {
                                     double pollution,
                                     double energy,//NOT IN USE
                                     double income)
-    {
+    {   
+        //aggiornamento della copia di CityState
+        CityState stateUpdate = new CityState(population, happiness, pollution, energy, income);
 
+        //aggiornamento del budget
+        if(income < 0)
+            this.spend(-income);    //in questo modo la gestione di budget negativo è relegata a spend()
+        else{
+            double newBudget = this.budget + income;
+
+            if(!Double.isFinite(newBudget))
+                throw new ArithmeticException("Budget overflow");
+
+            this.budget = newBudget;
+        }
+        
+        //aggiornamento del CityState
+        this.state = stateUpdate;     //in questo modo se CityState() o spend() non sono valide City non viene modificato 
+
+        //aggiornamento dei tick
+        this.tick++;
+
+        //aggiornamento degli observer
+        this.notifyObservers();
     }
 
+    //metodi per gli observer
     public void addObserver(Observer o) {
         if(o == null)
             throw new IllegalArgumentException("Observer cannot be null");
@@ -82,5 +108,13 @@ public class City {
     private void notifyObservers() {
         for (Observer observer : new ArrayList<>(observerList)) //la copia della lista serve a impedire problemi se durante la notifica viene chiamato add o remove
             observer.update(this);  //il parametro passato è l'oggetto City
+    }
+
+    public void buildingPlaced(){
+        //TODO
+    }
+
+    public void buildingRemoved(){
+        //TODO
     }
 }

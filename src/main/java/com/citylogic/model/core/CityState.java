@@ -9,6 +9,7 @@ public class CityState {
     private double energy;      //NOT IN USE
     private double income;
 
+    //getter
     public int gePopulation(){
         return population;
     }
@@ -27,6 +28,36 @@ public class CityState {
 
     public double getIncome(){
         return income;
+    }
+
+    //costruttori
+    public CityState(){
+        population = 0;
+        happiness = 0;
+        pollution = 0;
+        energy = 0;
+        income = 0;
+    }
+
+    public CityState(int population, double happiness, double pollution, double energy, double income){
+        this();
+
+        this.update(MetricType.POPULATION, population);
+        this.update(MetricType.HAPPINESS, happiness);
+        this.update(MetricType.POLLUTION, pollution);
+        this.update(MetricType.ENERGY, energy);
+        this.update(MetricType.INCOME, income);
+
+    }
+
+    public CityState(CityState state){
+        if(state == null)
+            throw new IllegalArgumentException("CityState cannot be null");  
+        population = state.population;
+        happiness = state.happiness;
+        pollution = state.pollution;
+        energy = state.energy;
+        income = state.income;
     }
 
     public void update(MetricType metric, double value) {
