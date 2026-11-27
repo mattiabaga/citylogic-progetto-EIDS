@@ -29,8 +29,8 @@ public class PopulationCalculator {
         int minHappiness = 30;
 
         if(population > maxPopulation)
-            throw new IllegalStateException("Population is greater than max capacity");
-
+            throw new IllegalStateException("Population is greater than max capacity");     //BISOGNA DECIDERE L'ECCEZIONE IN MODO CHE IL GAMECONTROLLER POSSA GESTIRE QUESTA SITUAZIONE
+                                                                                            //NON è COMPITO DI POPULATIONCALCULATOR DI GESTIRE QUESTA SITUAZIONE
         deltaPopulation = (double) (maxPopulation - population) * alpha * (double) (state.getHappiness() - minHappiness) / 100;
         /*
         la formula sarebbe:

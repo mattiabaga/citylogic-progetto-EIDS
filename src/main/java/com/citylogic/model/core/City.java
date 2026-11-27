@@ -95,7 +95,7 @@ public class City {
         this.tick++;
 
         //aggiornamento degli observer
-        this.notifyObservers();
+        this.notifyObservers();     //DA AGGIUSTARE SE GLI OBSERVER POSSONO LANCIARE ECCEZIONI
     }
 
     //metodi per gli observer

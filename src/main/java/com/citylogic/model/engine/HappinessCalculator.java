@@ -13,7 +13,7 @@ public class HappinessCalculator {
         int population = state.getPopulation();
         int maxPopulation = snapshot.getActiveHouseCapacity();
 
-        double occupationRate = 1;
+        double occupationRate = 0;  //Se la popolazione è pari a zero non ci dovrebbe essere una penalità DA DISCUTERE!!
         if(maxPopulation != 0)
             occupationRate = (double) population / (double) maxPopulation;
         //      R = P(k) / mP
