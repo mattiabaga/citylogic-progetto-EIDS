@@ -3,7 +3,7 @@ package com.citylogic.model.core;
 import java.util.List;
 import java.util.ArrayList;
 
-import com.citylogic.model.observer.MetricType;
+import com.citylogic.model.core.services.EnergyCoverageManager;
 import com.citylogic.model.observer.Observer;
 
 public class City {
@@ -14,6 +14,7 @@ public class City {
     private CityGrid grid;
     private CityState state;
     private List<Observer> observerList;
+    private EnergyCoverageManager manager;
 
     //getter
     public String getName(){
@@ -49,6 +50,7 @@ public class City {
         grid = new CityGrid();
         state = new CityState();
         observerList = new ArrayList<Observer>();
+        manager = new EnergyCoverageManager();
     }
     
     //metodi specifici di City
@@ -120,10 +122,12 @@ public class City {
     }
 
     public void buildingPlaced(){
+        manager.updateCoverage(grid);
         //TODO
     }
 
     public void buildingRemoved(){
+        manager.updateCoverage(grid);
         //TODO
     }
 }
