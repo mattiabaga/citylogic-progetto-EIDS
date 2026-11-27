@@ -1,6 +1,8 @@
 package com.citylogic.model.engine;
 
 import com.citylogic.model.core.City;
+import com.citylogic.model.core.CityState;
+import com.citylogic.model.core.GridSnapshot;
 
 public class TickEngine {
     private final City city;
@@ -23,6 +25,19 @@ public class TickEngine {
     }
 
     public void tick() {
-        // TODO
+        //analisi della griglia
+        GridSnapshot snapshot = gridAnalyzer.analyze(city.getCityGrid());
+
+        //analisi dei nuovi stati
+        CityState state = city.getCityState();
+        int population = populationCalculator.calculate(snapshot, state);
+        double happiness = happinessCalculator.calculate(snapshot, state);
+        double pollution = pollutionCalculator.calculate(snapshot);
+        double energy = 0;  //NOT IN USE
+        double income = economyCalculator.calculate(snapshot, state);
+
+        //applicazione degli effetti
+        city.applyTickResults(population, happiness, pollution, energy, income);
+
     }
 }
