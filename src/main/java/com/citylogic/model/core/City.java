@@ -53,7 +53,16 @@ public class City {
     
     //metodi specifici di City
     public void spend(double amount) {
-        // TODO
+         if (!Double.isFinite(amount))
+            throw new IllegalArgumentException("Amount must be finite");
+
+        if (amount < 0)
+            throw new IllegalArgumentException("Amount cannot be negative");
+
+        if (amount > budget)
+            throw new IllegalStateException("Insufficient budget");
+
+        budget -= amount;
     }
 
     public void applyTickResults(   int population,
@@ -76,7 +85,7 @@ public class City {
 
             this.budget = newBudget;
         }
-        
+
         //aggiornamento del CityState
         this.state = stateUpdate;     //in questo modo se CityState() o spend() non sono valide City non viene modificato 
 
