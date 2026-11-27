@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<!--
+    Schermata di gioco di CityLogic.
+    - in alto:  barra degli status (metriche della città) e, a destra,
+                i controlli per l'avanzamento del tempo (tick)
+    - al centro: griglia 20x20 a caselle quadrate (costruita dal controller)
+    - in basso: pulsanti che aprono il menù di costruzione e quello dei grafici
+-->
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.citylogic.controller.GameViewController"
+            stylesheets="@style.css"
+            styleClass="game-root">
+
+    <!-- ===== Barra degli status ===== -->
+    <top>
+        <HBox styleClass="status-bar" alignment="CENTER_LEFT" spacing="8">
+            <!-- Dashboard delle metriche (budget, popolazione, felicità, tick):
+                 componente separato con il proprio controller, StatusDashboardController.
+                 Occupa tutto lo spazio libero, così il tick finisce accanto ai pulsanti. -->
+            <fx:include fx:id="statusDashboard" source="status-dashboard.fxml"
+                        HBox.hgrow="ALWAYS"/>
+
+            <!-- ===== Avanzamento del tempo ===== -->
+            <HBox styleClass="time-controls" alignment="CENTER_RIGHT" spacing="8">
+                <Button text="+1 tick" onAction="#onNextTick" styleClass="tick-button"/>
+                <!-- Apre la finestra per avanzare di N tick o fino al tick N -->
+                <Button text="Avanza…" onAction="#onOpenAdvanceDialog" styleClass="tick-button"/>
+            </HBox>
+        </HBox>
+    </top>
+
+    <!-- ===== Area centrale: griglia + pannelli a comparsa ===== -->
+    <center>
+        <StackPane>
+            <!-- Contenitore della griglia: il controller ridimensiona le caselle
+                 in base allo spazio disponibile, così restano sempre quadrate -->
+            <StackPane fx:id="gridHolder" styleClass="grid-holder">
+                <GridPane fx:id="cityGrid" styleClass="city-grid"/>
+            </StackPane>
+
+            <!-- Menù di costruzione (nascosto finché non si preme "Costruisci") -->
+            <VBox fx:id="buildPanel" styleClass="overlay-panel" spacing="10"
+                  visible="false" managed="false"
+                  StackPane.alignment="BOTTOM_CENTER"
+                  maxWidth="560" maxHeight="-Infinity">
+                <StackPane.margin><Insets bottom="12"/></StackPane.margin>
+                <Label text="Costruisci" styleClass="panel-title"/>
+                <!-- I pulsanti degli edifici vengono creati dal controller -->
+                <FlowPane fx:id="buildingButtons" hgap="8" vgap="8"/>
+                <Label fx:id="buildHint" text="Seleziona un edificio, poi clicca una casella."
+                       styleClass="panel-hint" wrapText="true"/>
+            </VBox>
+
+            <!-- Menù dei grafici (nascosto finché non si preme "Grafici") -->
+            <VBox fx:id="chartsPanel" styleClass="overlay-panel" spacing="8"
+                  visible="false" managed="false"
+                  StackPane.alignment="BOTTOM_CENTER"
+                  maxWidth="640" maxHeight="340">
+                <StackPane.margin><Insets bottom="12"/></StackPane.margin>
+                <Label text="Grafici" styleClass="panel-title"/>
+                <LineChart fx:id="metricsChart" animated="false" createSymbols="false"
+                           legendVisible="true" VBox.vgrow="ALWAYS">
+                    <xAxis><NumberAxis label="Mese" forceZeroInRange="false"/></xAxis>
+                    <yAxis><NumberAxis label="Valore"/></yAxis>
+                </LineChart>
+                <Label text="I dati compariranno a ogni nuovo mese della simulazione."
+                       styleClass="panel-hint"/>
+            </VBox>
+        </StackPane>
+    </center>
+
+    <!-- ===== Barra inferiore con i pulsanti dei menù ===== -->
+    <bottom>
+        <HBox styleClass="bottom-bar" alignment="CENTER" spacing="12">
+            <ToggleButton fx:id="buildToggle" text="Costruisci"
+                          onAction="#onToggleBuildMenu" styleClass="bar-button"/>
+            <ToggleButton fx:id="chartsToggle" text="Grafici"
+                          onAction="#onToggleChartsMenu" styleClass="bar-button"/>
+        </HBox>
+    </bottom>
+</BorderPane>
