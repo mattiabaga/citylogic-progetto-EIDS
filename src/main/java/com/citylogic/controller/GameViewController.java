@@ -125,14 +125,16 @@ public class GameViewController implements Observer {
 
     @Override   /*Override per l'observer */
     public void update(City city) {
-        Runnable updateUI = () -> showStatus(
+        Runnable updateUI = () -> 
+
+            refreshGrid(city);
+            
+            showStatus(
                 city.getBudget(),
                 city.getCityState().getPopulation(),
                 city.getCityState().getHappiness(),
                 city.getTick()
         );
-
-        refreshGrid(city);
 
         if (Platform.isFxApplicationThread()) {
             updateUI.run();
@@ -141,6 +143,10 @@ public class GameViewController implements Observer {
         }
     }
 
+    /**
+    * Aggiorna la rappresentazione grafica della griglia in base allo stato
+    * corrente della città, evidenziando le case in base alla loro copertura energetica.
+    */
     private void refreshGrid(City city) {
         CityGrid modelGrid = city.getCityGrid();
 
