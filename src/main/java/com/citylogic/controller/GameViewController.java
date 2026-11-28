@@ -1,4 +1,7 @@
 package com.citylogic.controller;
+import com.citylogic.model.GameController;
+import com.citylogic.model.core.City;
+import com.citylogic.model.observer.Observer;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -23,6 +26,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.application.Platform;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -36,7 +40,7 @@ import java.util.Objects;
  * GameController (costruzione, tick, policy) e ricevere i nuovi valori
  * tramite il pattern Observer.</p>
  */
-public class GameViewController {
+public class GameViewController implements Observer {
 
     /** Lato della griglia della città, in caselle (specifica: 20x20). */
     private static final int GRID_SIZE = 20;
@@ -106,6 +110,38 @@ public class GameViewController {
      * arriverà dal City (campo tick) tramite l'Observer.
      */
     private int currentTick = 0;
+
+    private GameController gameController;
+    
+    /*Chiamato dal MainMenuController per collegare il gameController e un observer alla classe*/
+    public void setGameController(GameController gameController) {
+        if (gameController == null) {
+            throw new IllegalArgumentException("GameController cannot be null");
+        }
+
+        this.gameController = gameController;
+
+        City city = gameController.getCity();
+        city.addObserver(this);
+
+        update(city);
+    }
+
+    @Override   /*Override per l'observer */
+    public void update(City city) {
+        Runnable updateUI = () -> showStatus(
+                city.getBudget(),
+                city.getCityState().getPopulation(),
+                city.getCityState().getHappiness(),
+                city.getTick()
+        );
+
+        if (Platform.isFxApplicationThread()) {
+            updateUI.run();
+        } else {
+            Platform.runLater(updateUI);
+        }
+    }
 
     /** Chiamato automaticamente da JavaFX dopo aver caricato l'FXML. */
     @FXML

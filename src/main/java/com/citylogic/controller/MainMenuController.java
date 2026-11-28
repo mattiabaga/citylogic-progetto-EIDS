@@ -12,6 +12,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Objects;
 
+import com.citylogic.model.GameController;
+
 /**
  * Controller del menù principale (main-menu.fxml).
  */
@@ -23,13 +25,20 @@ public class MainMenuController {
     /** Pulsante "Nuova simulazione": apre la schermata di gioco. */
     @FXML
     private void onNewSimulation() {
-        // TODO: chiedere al GameController di creare una nuova City
         try {
-            Parent gameView = FXMLLoader.load(Objects.requireNonNull(
-                    getClass().getResource("/com/citylogic/view/game-view.fxml")));
+            GameController gameController = new GameController();
+
+            FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(
+                getClass().getResource("/com/citylogic/view/game-view.fxml")));
+            
+            Parent gameView = loader.load();
             // Si sostituisce il contenuto della finestra e la si massimizza
             // (schermo intero "in finestra": restano barra del titolo e taskbar).
             // La griglia si adatta da sola alla nuova dimensione.
+
+            GameViewController controller = loader.getController();
+            controller.setGameController(gameController);
+            
             Stage stage = (Stage) statusLabel.getScene().getWindow();
             statusLabel.getScene().setRoot(gameView);
             stage.setMaximized(true);
