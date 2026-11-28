@@ -8,6 +8,7 @@ import javafx.stage.Window;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -160,18 +161,32 @@ class GameViewControllerTest {
         gridHolderField.set(viewController, gridHolder);
 
         List<Boolean> transitions = new ArrayList<>();
-        root.disabledProperty().addListener((observable, oldValue, newValue) ->
-                transitions.add(newValue));
+        root.disableProperty().addListener((observable, oldValue, newValue) ->
+            transitions.add(newValue));
 
         return new TestContext(viewController, gameController, root, transitions);
     }
 
     private static void invokeAdvanceTicks(GameViewController controller, int ticks)
-            throws Exception {
+        throws Exception {
         Method method = GameViewController.class
                 .getDeclaredMethod("advanceTicks", int.class);
         method.setAccessible(true);
-        method.invoke(controller, ticks);
+
+        try {
+            method.invoke(controller, ticks);
+        } catch (InvocationTargetException e) {
+            Throwable cause = e.getCause();
+
+            if (cause instanceof Exception exception) {
+                throw exception;
+            }
+            if (cause instanceof Error error) {
+                throw error;
+            }
+
+            throw e;
+        }
     }
 
     private static <T> T onFxThread(Callable<T> action) throws Exception {
