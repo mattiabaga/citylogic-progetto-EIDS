@@ -39,6 +39,7 @@ class GameViewControllerTest {
 
         Platform.setImplicitExit(false);
     }
+
     @Test
     void advanceOneTickCallsGameControllerOnceAndRestoresUi() throws Exception {
         TestContext context = onFxThread(() -> createContext(new CountingGameController(0)));
@@ -66,7 +67,8 @@ class GameViewControllerTest {
             return null;
         });
     }
-   @Test
+
+    @Test
     void advanceTenTicksCallsGameControllerTenTimes() throws Exception {
         TestContext context = onFxThread(() -> createContext(new CountingGameController(0)));
 
@@ -108,7 +110,8 @@ class GameViewControllerTest {
             return null;
         });
     }
-   @Test
+
+    @Test
     void uiIsRestoredAndAdvancementStopsWhenTickThrows() throws Exception {
         TestContext context = onFxThread(() -> createContext(new CountingGameController(2)));
 
@@ -162,7 +165,8 @@ class GameViewControllerTest {
 
         return new TestContext(viewController, gameController, root, transitions);
     }
-      private static void invokeAdvanceTicks(GameViewController controller, int ticks)
+
+    private static void invokeAdvanceTicks(GameViewController controller, int ticks)
             throws Exception {
         Method method = GameViewController.class
                 .getDeclaredMethod("advanceTicks", int.class);
@@ -197,7 +201,8 @@ class GameViewControllerTest {
             }
         }
     }
-      private static final class TestContext {
+
+    private static final class TestContext {
         private final GameViewController viewController;
         private final CountingGameController gameController;
         private final StackPane root;
