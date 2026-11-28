@@ -17,6 +17,10 @@ public class GameController {
         this.buildingFactory = new BuildingFactory();
     }
 
+    public City getCity() {
+        return city;
+    }
+
     public void buildBuilding(BuildingType type, int x, int y) {
         // TODO
     }
