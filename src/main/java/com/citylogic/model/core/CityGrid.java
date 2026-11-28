@@ -20,6 +20,14 @@ public class CityGrid {
         // TODO
     }
 
+    public boolean canRemoveBuild(Building b, int x, int y) {
+        return false;
+    }
+
+    public void removeBuilding(Building b, int x, int y) {
+        // TODO
+    }
+
     public List<Cell> getNeighbors(int x, int y) {
         return Collections.emptyList();
     }
