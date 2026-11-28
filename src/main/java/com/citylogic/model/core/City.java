@@ -121,13 +121,26 @@ public class City {
             observer.update(this);  //il parametro passato è l'oggetto City
     }
 
-    public void buildingPlaced(){
+    public void placeBuilding(Building building, int x, int y) {
+        if (building == null)
+            throw new IllegalArgumentException("Building cannot be null");
+
+        grid.placeBuilding(building, x, y);
+
         manager.updateCoverage(grid);
-        //TODO
     }
 
-    public void buildingRemoved(){
+    public Building removeBuilding(int x, int y) {
+        Cell cell = grid.getCell(x, y);
+        Building building = cell.getBuilding();
+
+        if (building == null)
+            throw new IllegalStateException("No building at the specified position");
+
+        grid.removeBuilding(building, x, y);
+
         manager.updateCoverage(grid);
-        //TODO
+
+        return building;
     }
 }
