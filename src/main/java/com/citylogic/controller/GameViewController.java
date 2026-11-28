@@ -104,13 +104,6 @@ public class GameViewController implements Observer {
     /** true mentre l'utente trascina la mappa con il tasto destro. */
     private boolean panning;
 
-    /**
-     * Tick mostrato nella barra in alto.
-     * TODO: segnaposto finché la UI non è collegata al model; il valore vero
-     * arriverà dal City (campo tick) tramite l'Observer.
-     */
-    private int currentTick = 0;
-
     private GameController gameController;
     
     /*Chiamato dal MainMenuController per collegare il gameController e un observer alla classe*/
@@ -413,7 +406,7 @@ public class GameViewController implements Observer {
                     getClass().getResource("/com/citylogic/view/advance-ticks-dialog.fxml")));
             Parent content = loader.load();
             AdvanceTicksDialogController dialog = loader.getController();
-            dialog.setCurrentTick(currentTick);
+            dialog.setCurrentTick(gameController.getCity().getTick());
 
             Stage stage = new Stage();
             stage.setTitle("Avanza nel tempo");
@@ -436,14 +429,22 @@ public class GameViewController implements Observer {
 
     /**
      * Fa avanzare la simulazione di n tick.
-     * TODO: per ogni tick chiamare gameController.nextTick(); il nuovo valore
-     * del tick e le metriche arriveranno poi dall'Observer. Per ora si
-     * aggiorna solo il contatore mostrato.
+     * il nuovo valore del tick e le metriche arrivano dall'Observer.
      */
     private void advanceTicks(int n) {
-        currentTick += n;
-        showTick(currentTick);
+    for (int i = 0; i < n; i++) {
+        try {
+            gameController.nextTick();
+        } catch (RuntimeException e) {
+            new Alert(
+                    Alert.AlertType.ERROR,
+                    "Impossibile avanzare il Tick: " + e.getMessage()
+            ).showAndWait();
+
+            break;
+        }
     }
+}
 
     // =====================================================================
     // Barra degli status
