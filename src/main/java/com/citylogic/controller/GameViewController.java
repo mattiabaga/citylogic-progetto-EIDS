@@ -2,6 +2,9 @@ package com.citylogic.controller;
 import com.citylogic.model.GameController;
 import com.citylogic.model.core.City;
 import com.citylogic.model.observer.Observer;
+import com.citylogic.model.core.CityGrid;
+import com.citylogic.model.core.Building;
+import com.citylogic.model.core.buildings.House;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -129,10 +132,46 @@ public class GameViewController implements Observer {
                 city.getTick()
         );
 
+        refreshGrid(city);
+
         if (Platform.isFxApplicationThread()) {
             updateUI.run();
         } else {
             Platform.runLater(updateUI);
+        }
+    }
+
+    private void refreshGrid(City city) {
+        CityGrid modelGrid = city.getCityGrid();
+
+        for (int x = 0; x < GRID_SIZE; x++) {
+            for (int y = 0; y < GRID_SIZE; y++) {
+
+                Pane visualCell = cells[x][y];
+
+                visualCell.getStyleClass().removeAll(
+                        "house",
+                        "house-powered",
+                        "house-unpowered"
+                );
+
+                if (x >= modelGrid.getWidth()
+                        || y >= modelGrid.getHeight()) {
+                    continue;
+                }
+
+                Building building = modelGrid.getCell(x, y).getBuilding();
+
+                if (building instanceof House house) {
+                    visualCell.getStyleClass().add("house");
+
+                    visualCell.getStyleClass().add(
+                            house.hasEnergy()
+                                    ? "house-powered"
+                                    : "house-unpowered"
+                    );
+                }
+            }
         }
     }
 

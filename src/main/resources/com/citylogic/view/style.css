@@ -261,3 +261,12 @@
     -fx-font-size: 13px;
     -fx-padding: 6 12;
 }
+
+/* Case alimentate e non alimentate */
+.grid-cell.house-powered {
+    -fx-background-color: #86bd83;
+}
+
+.grid-cell.house-unpowered {
+    -fx-background-color: #d9a36f;
+}

@@ -128,6 +128,8 @@ public class City {
         grid.placeBuilding(building, x, y);
 
         manager.updateCoverage(grid);
+
+        notifyObservers();
     }
 
     public Building removeBuilding(int x, int y) {
@@ -140,6 +142,8 @@ public class City {
         grid.removeBuilding(building, x, y);
 
         manager.updateCoverage(grid);
+
+        notifyObservers();
 
         return building;
     }
