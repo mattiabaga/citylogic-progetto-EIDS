@@ -125,16 +125,16 @@ public class GameViewController implements Observer {
 
     @Override   /*Override per l'observer */
     public void update(City city) {
-        Runnable updateUI = () -> 
-
+        Runnable updateUI = () -> {
             refreshGrid(city);
-            
+
             showStatus(
-                city.getBudget(),
-                city.getCityState().getPopulation(),
-                city.getCityState().getHappiness(),
-                city.getTick()
-        );
+                    city.getBudget(),
+                    city.getCityState().getPopulation(),
+                    city.getCityState().getHappiness(),
+                    city.getTick()
+            );
+        };
 
         if (Platform.isFxApplicationThread()) {
             updateUI.run();
