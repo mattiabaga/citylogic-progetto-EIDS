@@ -428,23 +428,51 @@ public class GameViewController implements Observer {
     }
 
     /**
-     * Fa avanzare la simulazione di n tick.
+     * Fa avanzare la simulazione di n tick, disabilitando i comandi
+     * fino alla fine dell'aggiornamento dei tick.
      * il nuovo valore del tick e le metriche arrivano dall'Observer.
      */
     private void advanceTicks(int n) {
-    for (int i = 0; i < n; i++) {
-        try {
-            gameController.nextTick();
-        } catch (RuntimeException e) {
-            new Alert(
-                    Alert.AlertType.ERROR,
-                    "Impossibile avanzare il Tick: " + e.getMessage()
-            ).showAndWait();
+        if (gameController == null) {
+            new Alert(Alert.AlertType.ERROR,
+                    "La partita non è stata inizializzata.").showAndWait();
 
-            break;
+            return;
+        }
+
+        if (n < 0) {
+            throw new IllegalArgumentException(
+                    "The number of ticks cannot be negative");
+        }
+
+         if (n == 0) {
+        return;
+        }
+
+        // Disabilita temporaneamente tutti i controlli della schermata.
+        Parent gameRoot = gridHolder.getScene().getRoot();
+        boolean wasDisabled = gameRoot.isDisable();
+        RuntimeException failure = null;
+
+        gameRoot.setDisable(true);
+
+        try {
+            for (int i = 0; i < n; i++) {
+                gameController.nextTick();
+            }
+        } catch (RuntimeException e) {
+            failure = e;
+        } finally {
+            // Ripristina sempre lo stato precedente dell'interfaccia.
+            gameRoot.setDisable(wasDisabled);
+        }
+
+        if (failure != null) {
+            new Alert(Alert.AlertType.ERROR,
+                    "Impossibile avanzare il Tick: "
+                            + failure.getMessage()).showAndWait();
         }
     }
-}
 
     // =====================================================================
     // Barra degli status
